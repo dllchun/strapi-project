@@ -362,6 +362,45 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiReminderReminder extends Schema.CollectionType {
+  collectionName: 'reminders';
+  info: {
+    singularName: 'reminder';
+    pluralName: 'reminders';
+    displayName: 'Reminder';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    caregiver: Attribute.Relation<
+      'api::reminder.reminder',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    description: Attribute.RichText;
+    care_recipient: Attribute.String;
+    care_recipient_phone: Attribute.BigInteger & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::reminder.reminder',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::reminder.reminder',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -662,6 +701,13 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     Gender: Attribute.Enumeration<['Male', 'Female']>;
     Birthday: Attribute.Date;
     confirmation_of_privacy: Attribute.Boolean & Attribute.DefaultTo<true>;
+    remind: Attribute.Enumeration<['self', 'relatives']>;
+    phone_number: Attribute.BigInteger & Attribute.Required;
+    reminder: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::reminder.reminder'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -689,6 +735,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::reminder.reminder': ApiReminderReminder;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reminders",
+  "info": {
+    "singularName": "reminder",
+    "pluralName": "reminders",
+    "displayName": "Reminder",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "caregiver": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "reminder"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "care_recipient": {
+      "type": "string"
+    },
+    "care_recipient_phone": {
+      "type": "biginteger",
+      "required": true,
+      "unique": false
+    }
+  }
+}

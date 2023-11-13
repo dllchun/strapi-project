@@ -78,6 +78,24 @@
     "confirmation_of_privacy": {
       "type": "boolean",
       "default": true
+    },
+    "remind": {
+      "type": "enumeration",
+      "enum": [
+        "self",
+        "relatives"
+      ]
+    },
+    "phone_number": {
+      "type": "biginteger",
+      "required": true,
+      "unique": false
+    },
+    "reminder": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::reminder.reminder",
+      "mappedBy": "caregiver"
     }
   }
 }
