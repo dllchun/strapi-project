@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-11-12T05:53:53.139Z"
+    "x-generation-date": "2023-11-18T06:10:14.519Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -95,7 +95,8 @@
           "data": {
             "required": [
               "title",
-              "care_recipient_phone"
+              "care_recipient_phone",
+              "remind_date"
             ],
             "type": "object",
             "properties": {
@@ -113,9 +114,6 @@
                 ],
                 "example": "string or id"
               },
-              "description": {
-                "type": "string"
-              },
               "care_recipient": {
                 "type": "string"
               },
@@ -123,6 +121,19 @@
                 "type": "string",
                 "pattern": "^\\d*$",
                 "example": "123456789"
+              },
+              "remind_date": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "regular_7days": {
+                "type": "boolean"
+              },
+              "regular_4weeks": {
+                "type": "boolean"
+              },
+              "remind_counter": {
+                "type": "integer"
               }
             }
           }
@@ -178,7 +189,8 @@
         "type": "object",
         "required": [
           "title",
-          "care_recipient_phone"
+          "care_recipient_phone",
+          "remind_date"
         ],
         "properties": {
           "title": {
@@ -642,14 +654,14 @@
                           }
                         }
                       },
-                      "Gender": {
+                      "gender": {
                         "type": "string",
                         "enum": [
                           "Male",
                           "Female"
                         ]
                       },
-                      "Birthday": {
+                      "birthday": {
                         "type": "string",
                         "format": "date"
                       },
@@ -700,9 +712,6 @@
                                       }
                                     }
                                   },
-                                  "description": {
-                                    "type": "string"
-                                  },
                                   "care_recipient": {
                                     "type": "string"
                                   },
@@ -710,6 +719,19 @@
                                     "type": "string",
                                     "pattern": "^\\d*$",
                                     "example": "123456789"
+                                  },
+                                  "remind_date": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "regular_7days": {
+                                    "type": "boolean"
+                                  },
+                                  "regular_4weeks": {
+                                    "type": "boolean"
+                                  },
+                                  "remind_counter": {
+                                    "type": "integer"
                                   },
                                   "createdAt": {
                                     "type": "string",
@@ -811,9 +833,6 @@
               }
             }
           },
-          "description": {
-            "type": "string"
-          },
           "care_recipient": {
             "type": "string"
           },
@@ -821,6 +840,19 @@
             "type": "string",
             "pattern": "^\\d*$",
             "example": "123456789"
+          },
+          "remind_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "regular_7days": {
+            "type": "boolean"
+          },
+          "regular_4weeks": {
+            "type": "boolean"
+          },
+          "remind_counter": {
+            "type": "integer"
           },
           "createdAt": {
             "type": "string",

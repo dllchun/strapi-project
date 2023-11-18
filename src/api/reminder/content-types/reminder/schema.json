@@ -23,9 +23,6 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "reminder"
     },
-    "description": {
-      "type": "richtext"
-    },
     "care_recipient": {
       "type": "string"
     },
@@ -33,6 +30,25 @@
       "type": "biginteger",
       "required": true,
       "unique": false
+    },
+    "remind_date": {
+      "type": "datetime",
+      "required": true,
+      "unique": false
+    },
+    "regular_7days": {
+      "type": "boolean",
+      "required": false,
+      "default": false
+    },
+    "regular_4weeks": {
+      "type": "boolean",
+      "default": false
+    },
+    "remind_counter": {
+      "type": "integer",
+      "default": 0,
+      "max": 3
     }
   }
 }

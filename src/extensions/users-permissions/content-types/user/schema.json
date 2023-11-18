@@ -65,14 +65,14 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "Gender": {
+    "gender": {
       "type": "enumeration",
       "enum": [
         "Male",
         "Female"
       ]
     },
-    "Birthday": {
+    "birthday": {
       "type": "date"
     },
     "confirmation_of_privacy": {

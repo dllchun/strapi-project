@@ -380,9 +380,16 @@ export interface ApiReminderReminder extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    description: Attribute.RichText;
     care_recipient: Attribute.String;
     care_recipient_phone: Attribute.BigInteger & Attribute.Required;
+    remind_date: Attribute.DateTime & Attribute.Required;
+    regular_7days: Attribute.Boolean & Attribute.DefaultTo<false>;
+    regular_4weeks: Attribute.Boolean & Attribute.DefaultTo<false>;
+    remind_counter: Attribute.Integer &
+      Attribute.SetMinMax<{
+        max: 3;
+      }> &
+      Attribute.DefaultTo<0>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -698,8 +705,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    Gender: Attribute.Enumeration<['Male', 'Female']>;
-    Birthday: Attribute.Date;
+    gender: Attribute.Enumeration<['Male', 'Female']>;
+    birthday: Attribute.Date;
     confirmation_of_privacy: Attribute.Boolean & Attribute.DefaultTo<true>;
     remind: Attribute.Enumeration<['self', 'relatives']>;
     phone_number: Attribute.BigInteger & Attribute.Required;
