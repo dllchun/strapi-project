@@ -14,7 +14,7 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true,
+      "required": false,
       "unique": false
     },
     "caregiver": {
@@ -26,14 +26,9 @@
     "care_recipient": {
       "type": "string"
     },
-    "care_recipient_phone": {
-      "type": "biginteger",
-      "required": true,
-      "unique": false
-    },
     "remind_date": {
       "type": "datetime",
-      "required": true,
+      "required": false,
       "unique": false
     },
     "regular_7days": {
@@ -49,6 +44,18 @@
       "type": "integer",
       "default": 0,
       "max": 3
+    },
+    "care_recipient_phone": {
+      "type": "string"
+    },
+    "remind_date_formatted": {
+      "type": "string"
+    },
+    "regular_7days_counter": {
+      "type": "integer"
+    },
+    "cron_executed": {
+      "type": "boolean"
     }
   }
 }
