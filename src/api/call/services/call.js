@@ -12,7 +12,6 @@ module.exports = createCoreService("api::call.call", ({ strapi }) => ({
     const authToken = process.env.TWILIO_AUTH_TOKEN;
     const callFrom = process.env.TWILIONUM;
     const client = require("twilio")(accountSid, authToken);
-    console.log(twiml);
 
     client.calls
       .create({
