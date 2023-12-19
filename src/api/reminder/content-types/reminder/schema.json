@@ -17,12 +17,6 @@
       "required": false,
       "unique": false
     },
-    "caregiver": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "reminder"
-    },
     "care_recipient": {
       "type": "string"
     },
@@ -56,6 +50,12 @@
     },
     "cron_executed": {
       "type": "boolean"
+    },
+    "caregiver": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "reminders"
     }
   }
 }

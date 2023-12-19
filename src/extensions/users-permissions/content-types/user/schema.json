@@ -91,9 +91,9 @@
       "required": true,
       "unique": false
     },
-    "reminder": {
+    "reminders": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::reminder.reminder",
       "mappedBy": "caregiver"
     }

@@ -399,11 +399,6 @@ export interface ApiReminderReminder extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    caregiver: Attribute.Relation<
-      'api::reminder.reminder',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
     care_recipient: Attribute.String;
     remind_date: Attribute.DateTime;
     regular_7days: Attribute.Boolean & Attribute.DefaultTo<false>;
@@ -417,6 +412,11 @@ export interface ApiReminderReminder extends Schema.CollectionType {
     remind_date_formatted: Attribute.String;
     regular_7days_counter: Attribute.Integer;
     cron_executed: Attribute.Boolean;
+    caregiver: Attribute.Relation<
+      'api::reminder.reminder',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -737,9 +737,9 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     confirmation_of_privacy: Attribute.Boolean & Attribute.DefaultTo<true>;
     remind: Attribute.Enumeration<['self', 'relatives']>;
     phone_number: Attribute.BigInteger & Attribute.Required;
-    reminder: Attribute.Relation<
+    reminders: Attribute.Relation<
       'plugin::users-permissions.user',
-      'oneToOne',
+      'oneToMany',
       'api::reminder.reminder'
     >;
     createdAt: Attribute.DateTime;

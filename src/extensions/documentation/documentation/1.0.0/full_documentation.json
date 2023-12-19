@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-12-13T02:03:10.247Z"
+    "x-generation-date": "2023-12-19T16:03:13.489Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -496,17 +496,6 @@
               "title": {
                 "type": "string"
               },
-              "caregiver": {
-                "oneOf": [
-                  {
-                    "type": "integer"
-                  },
-                  {
-                    "type": "string"
-                  }
-                ],
-                "example": "string or id"
-              },
               "care_recipient": {
                 "type": "string"
               },
@@ -534,6 +523,17 @@
               },
               "cron_executed": {
                 "type": "boolean"
+              },
+              "caregiver": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
               }
             }
           }
@@ -590,6 +590,34 @@
         "properties": {
           "title": {
             "type": "string"
+          },
+          "care_recipient": {
+            "type": "string"
+          },
+          "remind_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "regular_7days": {
+            "type": "boolean"
+          },
+          "regular_4weeks": {
+            "type": "boolean"
+          },
+          "remind_counter": {
+            "type": "integer"
+          },
+          "care_recipient_phone": {
+            "type": "string"
+          },
+          "remind_date_formatted": {
+            "type": "string"
+          },
+          "regular_7days_counter": {
+            "type": "integer"
+          },
+          "cron_executed": {
+            "type": "boolean"
           },
           "caregiver": {
             "type": "object",
@@ -1075,107 +1103,110 @@
                         "pattern": "^\\d*$",
                         "example": "123456789"
                       },
-                      "reminder": {
+                      "reminders": {
                         "type": "object",
                         "properties": {
                           "data": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "number"
-                              },
-                              "attributes": {
-                                "type": "object",
-                                "properties": {
-                                  "title": {
-                                    "type": "string"
-                                  },
-                                  "caregiver": {
-                                    "type": "object",
-                                    "properties": {
-                                      "data": {
-                                        "type": "object",
-                                        "properties": {
-                                          "id": {
-                                            "type": "number"
-                                          },
-                                          "attributes": {
-                                            "type": "object",
-                                            "properties": {}
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "attributes": {
+                                  "type": "object",
+                                  "properties": {
+                                    "title": {
+                                      "type": "string"
+                                    },
+                                    "care_recipient": {
+                                      "type": "string"
+                                    },
+                                    "remind_date": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "regular_7days": {
+                                      "type": "boolean"
+                                    },
+                                    "regular_4weeks": {
+                                      "type": "boolean"
+                                    },
+                                    "remind_counter": {
+                                      "type": "integer"
+                                    },
+                                    "care_recipient_phone": {
+                                      "type": "string"
+                                    },
+                                    "remind_date_formatted": {
+                                      "type": "string"
+                                    },
+                                    "regular_7days_counter": {
+                                      "type": "integer"
+                                    },
+                                    "cron_executed": {
+                                      "type": "boolean"
+                                    },
+                                    "caregiver": {
+                                      "type": "object",
+                                      "properties": {
+                                        "data": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "number"
+                                            },
+                                            "attributes": {
+                                              "type": "object",
+                                              "properties": {}
+                                            }
                                           }
                                         }
                                       }
-                                    }
-                                  },
-                                  "care_recipient": {
-                                    "type": "string"
-                                  },
-                                  "remind_date": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "regular_7days": {
-                                    "type": "boolean"
-                                  },
-                                  "regular_4weeks": {
-                                    "type": "boolean"
-                                  },
-                                  "remind_counter": {
-                                    "type": "integer"
-                                  },
-                                  "care_recipient_phone": {
-                                    "type": "string"
-                                  },
-                                  "remind_date_formatted": {
-                                    "type": "string"
-                                  },
-                                  "regular_7days_counter": {
-                                    "type": "integer"
-                                  },
-                                  "cron_executed": {
-                                    "type": "boolean"
-                                  },
-                                  "createdAt": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "updatedAt": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "publishedAt": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "createdBy": {
-                                    "type": "object",
-                                    "properties": {
-                                      "data": {
-                                        "type": "object",
-                                        "properties": {
-                                          "id": {
-                                            "type": "number"
-                                          },
-                                          "attributes": {
-                                            "type": "object",
-                                            "properties": {}
+                                    },
+                                    "createdAt": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "updatedAt": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "publishedAt": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "createdBy": {
+                                      "type": "object",
+                                      "properties": {
+                                        "data": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "number"
+                                            },
+                                            "attributes": {
+                                              "type": "object",
+                                              "properties": {}
+                                            }
                                           }
                                         }
                                       }
-                                    }
-                                  },
-                                  "updatedBy": {
-                                    "type": "object",
-                                    "properties": {
-                                      "data": {
-                                        "type": "object",
-                                        "properties": {
-                                          "id": {
-                                            "type": "number"
-                                          },
-                                          "attributes": {
-                                            "type": "object",
-                                            "properties": {}
+                                    },
+                                    "updatedBy": {
+                                      "type": "object",
+                                      "properties": {
+                                        "data": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "number"
+                                            },
+                                            "attributes": {
+                                              "type": "object",
+                                              "properties": {}
+                                            }
                                           }
                                         }
                                       }
@@ -1234,34 +1265,6 @@
                 }
               }
             }
-          },
-          "care_recipient": {
-            "type": "string"
-          },
-          "remind_date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "regular_7days": {
-            "type": "boolean"
-          },
-          "regular_4weeks": {
-            "type": "boolean"
-          },
-          "remind_counter": {
-            "type": "integer"
-          },
-          "care_recipient_phone": {
-            "type": "string"
-          },
-          "remind_date_formatted": {
-            "type": "string"
-          },
-          "regular_7days_counter": {
-            "type": "integer"
-          },
-          "cron_executed": {
-            "type": "boolean"
           },
           "createdAt": {
             "type": "string",
