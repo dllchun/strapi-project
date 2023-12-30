@@ -410,13 +410,15 @@ export interface ApiReminderReminder extends Schema.CollectionType {
       Attribute.DefaultTo<0>;
     care_recipient_phone: Attribute.String;
     remind_date_formatted: Attribute.String;
-    regular_7days_counter: Attribute.Integer;
-    cron_executed: Attribute.Boolean;
+    regular_7days_counter: Attribute.Integer & Attribute.DefaultTo<0>;
+    cron_executed: Attribute.Boolean & Attribute.DefaultTo<false>;
     caregiver: Attribute.Relation<
       'api::reminder.reminder',
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    remind_end_date: Attribute.DateTime;
+    remind_end_date_formatted: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

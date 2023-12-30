@@ -7,5 +7,10 @@ module.exports = {
       path: "/create-reminders",
       handler: "reminder.createReminder",
     },
+    {
+      method: "GET",
+      path: "/test",
+      handler: "reminder.testRoute",
+    },
   ],
 };

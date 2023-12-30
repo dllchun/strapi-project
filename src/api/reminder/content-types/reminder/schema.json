@@ -46,16 +46,24 @@
       "type": "string"
     },
     "regular_7days_counter": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0
     },
     "cron_executed": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "caregiver": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "reminders"
+    },
+    "remind_end_date": {
+      "type": "datetime"
+    },
+    "remind_end_date_formatted": {
+      "type": "string"
     }
   }
 }

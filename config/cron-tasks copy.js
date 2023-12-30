@@ -1,37 +1,28 @@
 module.exports = {
   reminderCall: {
     task: async () => {
-      console.log("loading single reminder call");
+      console.log("loading reminderCall");
       const currentTime = new Date();
-      //Get only the time from currentTime (eg. 11:30)
       const timestamp = currentTime.toISOString().slice(0, 16);
       const reminderToBePublished = await strapi.db
         .query("api::reminder.reminder")
         .findMany({
           where: {
-            regular_7days: {
-              $eq: false,
-            },
-            regular_4weeks: {
-              $eq: false,
+            publishedAt: {
+              $null: true,
             },
             remind_date_formatted: {
               $eq: timestamp,
-            },
-            cron_executed: {
-              $eq: false,
             },
           },
         });
       await Promise.all(
         reminderToBePublished.map(async (reminder) => {
-          const remind_counter = reminder.remind_counter;
           const updateReminder = strapi
             .service("api::reminder.reminder")
             .update(reminder.id, {
               data: {
-                remind_counter: remind_counter + 1,
-                updatedAt: Date.now(),
+                publishedAt: new Date(),
               },
             });
 
@@ -58,23 +49,23 @@ module.exports = {
     },
   },
 
-  regularSevenDayCall: {
+  regularCall: {
     task: async () => {
       console.log("loading regular cron");
       const currentTime = new Date();
-      const timestamp = currentTime.toISOString().slice(11, 16);
+      const timestamp = currentTime.toISOString().slice(0, 16);
       const regularReminderToBeCalled = await strapi.db
         .query("api::reminder.reminder")
         .findMany({
           where: {
+            publishedAt: {
+              $notNull: true,
+            },
             regular_7days: {
               $eq: true,
             },
-            regular_4weeks: {
-              $eq: false,
-            },
             remind_date_formatted: {
-              $contains: timestamp,
+              $eq: timestamp,
             },
             regular_7days_counter: {
               $lte: 7,
@@ -93,7 +84,6 @@ module.exports = {
               data: {
                 regular_7days_counter: regular_7days_counter + 1,
                 cron_executed: true,
-                updatedAt: Date.now(),
               },
             });
           const recipientPhone = reminder.care_recipient_phone;
